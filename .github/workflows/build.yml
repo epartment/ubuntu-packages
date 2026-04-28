@@ -179,3 +179,85 @@ jobs:
             **Supported:** Ubuntu 22.04 (jammy), 24.04 (noble) · amd64, arm64
 
             See the README for full installation instructions.
+
+  publish-apt-repo:
+    needs: [generate-matrix, build]
+    if: ${{ inputs.release != false }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main (for scripts)
+        uses: actions/checkout@v4
+
+      - name: Download all .deb artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: debs
+          merge-multiple: true
+
+      - name: List downloaded debs
+        run: ls -lh debs/
+
+      - name: Install apt repo tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            dpkg-dev apt-utils gnupg
+
+      - name: Import GPG signing key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          echo "${GPG_PRIVATE_KEY}" | gpg --batch --import
+          # Trust the key fully so gpg doesn't prompt
+          GPG_FP=$(gpg --list-secret-keys --with-colons \
+              | awk -F: '/^fpr/{print $10; exit}')
+          echo "${GPG_FP}:6:" | gpg --import-ownertrust
+
+      - name: Checkout (or create) gh-pages branch
+        run: |
+          git fetch origin gh-pages 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git worktree add gh-pages origin/gh-pages
+          else
+            # First time: create an empty orphan branch
+            git worktree add --orphan gh-pages gh-pages
+            cd gh-pages && git commit --allow-empty -m "chore: init gh-pages"
+          fi
+
+      - name: Build / update apt repository
+        env:
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        run: |
+          chmod +x scripts/build-apt-repo.sh
+          scripts/build-apt-repo.sh debs gh-pages
+
+      - name: Add index page if missing
+        run: |
+          if [ ! -f gh-pages/index.html ]; then
+            cat > gh-pages/index.html <<'HTML'
+          <!doctype html>
+          <html>
+          <head><meta charset="utf-8"><title>Epartment nginx apt repository</title></head>
+          <body>
+          <h1>Epartment nginx apt repository</h1>
+          <p>See the <a href="https://github.com/${{ github.repository }}">README</a>
+          for installation instructions.</p>
+          </body>
+          </html>
+          HTML
+          fi
+
+      - name: Commit and push gh-pages
+        run: |
+          cd gh-pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed in the apt repo, skipping commit."
+          else
+            git commit -m "apt-repo: update packages (geoip2 ${{ needs.generate-matrix.outputs.geoip2_version }})"
+            git push origin HEAD:gh-pages
+          fi
