@@ -32,7 +32,7 @@ jobs:
           GEOIP2_VERSION: ${{ inputs.geoip2_version || '3.4' }}
         run: |
           MATRIX=$(python3 - <<'PYEOF'
-          import os, json, urllib.request
+          import os, re, json, urllib.request
 
           CODENAMES = [
               ('jammy', 'ubuntu:22.04'),
@@ -57,8 +57,10 @@ jobs:
                   seen = set()
                   for line in content.splitlines():
                       if line.startswith('Version:'):
-                          # Version field looks like: 1.28.3-1~jammy
-                          v = line.split()[-1].split('-')[0]
+                          # Version field looks like: 1.28.3-1~jammy or 1.28.2+0~...
+                          raw = line.split()[-1]
+                          raw = raw.split(':')[-1]   # strip epoch if present
+                          v = re.split(r'[-+]', raw)[0]  # keep only upstream version
                           parts = v.split('.')
                           if len(parts) >= 2 and int(parts[1]) % 2 == 0:
                               seen.add(v)
