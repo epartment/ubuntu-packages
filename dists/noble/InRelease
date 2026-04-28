@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64 arm64
+Codename: noble
+Components: nginx
+Date: Tue, 28 Apr 2026 12:33:22 +0000
+Description: Prebuilt ngx_http_geoip2_module for nginx.org's nginx
+Label: Epartment nginx geoip2
+Origin: Epartment
+Suite: noble
+MD5Sum:
+ 624a59e2547a9973b19f1151fe1a19cd              227 Release
+ d0941fea91645ac3daf64127fe509e0a              741 nginx/binary-amd64/Packages
+ f2687350907aebcc76187575953c0076              506 nginx/binary-amd64/Packages.gz
+ 16d5a4b3982a315f16136414deddb5f4              741 nginx/binary-arm64/Packages
+ c69e88e4f31dfdeb0953d83e5ab355ce              506 nginx/binary-arm64/Packages.gz
+SHA1:
+ 09e61dd2e7ac3c1ad960bfc373cff2ac90f75c6e              227 Release
+ 3c6961625eaca626c32cde0302b0bfbcacb9529c              741 nginx/binary-amd64/Packages
+ aad7fe6baa62b1f50fd9a0f67a16a6d28cb952c0              506 nginx/binary-amd64/Packages.gz
+ 3be43a7d2f56f70a8ea53d8069a9945c2334af42              741 nginx/binary-arm64/Packages
+ a41bd2fb23fcb8772c6d485eaee045eb4cfab84f              506 nginx/binary-arm64/Packages.gz
+SHA256:
+ 3a5a78bb8e048f86c124308b09a186302a6b789697f1ad553db5b24c4d2f1ac3              227 Release
+ a095fb89b322c461fd69f815b9bf7d0744d734d3e95fd7ff3d4fdea41f44d929              741 nginx/binary-amd64/Packages
+ 1a1e19ca4e3ec41cb8e1ca90e1988f62415b294b79b7fe9dea93e0ac0bd2163c              506 nginx/binary-amd64/Packages.gz
+ 6cf1b3cdbddbd85331d5fad73e32f11aceb74a1ba480070378862c4b336ccaa4              741 nginx/binary-arm64/Packages
+ 7aea6df8bf1a374c7a4ec2fe115335eca39824a0d35b085e6236471463068f8f              506 nginx/binary-arm64/Packages.gz
+SHA512:
+ 2b757ab5617ccb4d92e00e4d1183a08bd7ff9388721280f80a10bfba54496f35542776cc820879fd4b94217c1e703c8548b01eb6459b118adebadc6ebe2faec5              227 Release
+ ef6c82f531b04d2c96dd7db5dba81f579651d64c0c6c5613d749429b47c2e247deeae30870d11c434244e4bb042d8aef1f95e935602a29fbbc41e428a6bf9a9f              741 nginx/binary-amd64/Packages
+ b64d30e5d6fb89b702b9b0bccad904a706aeebe027d0c76407ffa547403aa395ef7576ad669f21012dd1079132002b2d8593292b042244be2458d58358f5f984              506 nginx/binary-amd64/Packages.gz
+ 8dece78fcd644b77d19f8678df7f6618f5c63e6ddbdaefca55115c3c70762337ee0db1f9e5b5ff8782519810257a7e5227b6a8485eafe0ffbdc321ebb2076012              741 nginx/binary-arm64/Packages
+ 197fc060fee9d15bd275171d7a0c67da392e6d9f7b2d0dac5d286fea35d652dd53031b84d572a01bf092f9be5cecdd537dd53abc0c25923f1be9a73ea9c11484              506 nginx/binary-arm64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQQHpqMlX2EIPm6tZPXSpM9OKGJuHQUCafCpEgAKCRDSpM9OKGJu
+HTdVAP0eymj3GxgbyrJN+Bq9a9sggwjWueEym+Sup/lETBaTdQEA8RtACF2yh0MB
+DI7yYnzBpPMWwSyjt+8LWabHGv0pXwM=
+=fkW5
+-----END PGP SIGNATURE-----
