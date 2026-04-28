@@ -22,16 +22,19 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get -o Acquire::Retries=3 update
 
 # Ubuntu 26.04+ dropped libpcre3-dev in favour of PCRE2; libgeoip-dev is also
-# gone. Detect what's available and adjust accordingly.
-if apt-cache show libpcre3-dev > /dev/null 2>&1; then
-    PCRE_PKG="libpcre3-dev"
-    PCRE_FLAG=""
-else
+# gone. Use apt-cache policy (not show) — policy reports "Candidate: (none)"
+# for packages that exist in apt's index but have no installable candidate.
+PCRE3_CANDIDATE=$(apt-cache policy libpcre3-dev 2>/dev/null | awk '/Candidate:/{print $2}')
+if [ "${PCRE3_CANDIDATE}" = "(none)" ] || [ -z "${PCRE3_CANDIDATE}" ]; then
     PCRE_PKG="libpcre2-dev"
     PCRE_FLAG="--with-pcre2"
+else
+    PCRE_PKG="libpcre3-dev"
+    PCRE_FLAG=""
 fi
 OPTIONAL_PKGS=""
-if apt-cache show libgeoip-dev > /dev/null 2>&1; then
+GEOIP_CANDIDATE=$(apt-cache policy libgeoip-dev 2>/dev/null | awk '/Candidate:/{print $2}')
+if [ "${GEOIP_CANDIDATE}" != "(none)" ] && [ -n "${GEOIP_CANDIDATE}" ]; then
     OPTIONAL_PKGS="libgeoip-dev"
 fi
 
