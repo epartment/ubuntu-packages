@@ -226,6 +226,11 @@ jobs:
           chmod +x scripts/build-apt-repo.sh
           scripts/build-apt-repo.sh debs gh-pages
 
+      - name: Copy signing key to gh-pages
+        run: |
+          mkdir -p gh-pages/debian
+          cp debian/apt-key.asc gh-pages/debian/apt-key.asc
+
       - name: Add index page if missing
         run: |
           if [ ! -f gh-pages/index.html ]; then
