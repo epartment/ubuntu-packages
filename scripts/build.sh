@@ -75,9 +75,11 @@ make modules -j"$(nproc)"
 
 # 4. Stage the .deb
 PKG_NAME="libnginx-mod-http-geoip2"
-PKG_VERSION="${NGINX_VERSION}+${GEOIP2_TAG}-${PKG_REVISION}~${UBUNTU_CODENAME}"
-# GitHub Releases replaces ~ with . in asset filenames, so we match that
-# in the filename while keeping ~ in the Version: field for correct apt ordering.
+# Epoch 2 ensures apt always prefers our package over Ubuntu's (epoch 1:3.4-*)
+# and Ondrej's PPA (epoch 1:3.4+...) versions of this package.
+PKG_VERSION="2:${NGINX_VERSION}+${GEOIP2_TAG}-${PKG_REVISION}~${UBUNTU_CODENAME}"
+# Epoch cannot appear in filenames (: is invalid); GitHub Releases also replaces
+# ~ with . so we use . in the filename while keeping 2:...~codename in the Version field.
 DEB_FILENAME_VERSION="${NGINX_VERSION}+${GEOIP2_TAG}-${PKG_REVISION}.${UBUNTU_CODENAME}"
 PKG_DIR="${WORKDIR}/pkg"
 
