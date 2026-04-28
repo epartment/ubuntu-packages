@@ -26,11 +26,11 @@ apt-get -o Acquire::Retries=3 update
 # for packages that exist in apt's index but have no installable candidate.
 PCRE3_CANDIDATE=$(apt-cache policy libpcre3-dev 2>/dev/null | awk '/Candidate:/{print $2}')
 if [ "${PCRE3_CANDIDATE}" = "(none)" ] || [ -z "${PCRE3_CANDIDATE}" ]; then
+    # Ubuntu 26.04+ — libpcre3-dev removed; nginx configure auto-detects PCRE2
+    # when only libpcre2-dev is present (pcre2-config found, pcre-config not found)
     PCRE_PKG="libpcre2-dev"
-    PCRE_FLAG="--with-pcre2"
 else
     PCRE_PKG="libpcre3-dev"
-    PCRE_FLAG=""
 fi
 OPTIONAL_PKGS=""
 GEOIP_CANDIDATE=$(apt-cache policy libgeoip-dev 2>/dev/null | awk '/Candidate:/{print $2}')
@@ -88,7 +88,6 @@ cd "nginx-${NGINX_VERSION}"
     --with-compat \
     --with-file-aio \
     --with-threads \
-    ${PCRE_FLAG} \
     --add-dynamic-module="../ngx_http_geoip2_module-${GEOIP2_TAG}"
 
 make modules -j"$(nproc)"
