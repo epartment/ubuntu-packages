@@ -76,6 +76,9 @@ make modules -j"$(nproc)"
 # 4. Stage the .deb
 PKG_NAME="libnginx-mod-http-geoip2"
 PKG_VERSION="${NGINX_VERSION}+${GEOIP2_TAG}-${PKG_REVISION}~${UBUNTU_CODENAME}"
+# GitHub Releases replaces ~ with . in asset filenames, so we match that
+# in the filename while keeping ~ in the Version: field for correct apt ordering.
+DEB_FILENAME_VERSION="${NGINX_VERSION}+${GEOIP2_TAG}-${PKG_REVISION}.${UBUNTU_CODENAME}"
 PKG_DIR="${WORKDIR}/pkg"
 
 mkdir -p "${PKG_DIR}/DEBIAN"
@@ -126,7 +129,7 @@ chmod 755 "${PKG_DIR}/DEBIAN/prerm"
 
 cp "${WORKDIR}/../debian/copyright" "${PKG_DIR}/usr/share/doc/${PKG_NAME}/" 2>/dev/null || true
 
-DEB_FILE="${PKG_NAME}_${PKG_VERSION}_${ARCH}.deb"
+DEB_FILE="${PKG_NAME}_${DEB_FILENAME_VERSION}_${ARCH}.deb"
 fakeroot dpkg-deb --build "${PKG_DIR}" "${OUTPUT_DIR}/${DEB_FILE}"
 
 echo "==> Built ${OUTPUT_DIR}/${DEB_FILE}"
