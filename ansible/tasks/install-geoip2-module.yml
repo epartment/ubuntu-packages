@@ -1,0 +1,47 @@
+---
+# Install the Epartment-prebuilt ngx_http_geoip2_module for nginx.org's nginx.
+#
+# Requirements:
+#   - nginx from nginx.org must already be installed (not distro nginx)
+#   - Tested on Ubuntu 22.04 (jammy), 24.04 (noble), 26.04 (resolute)
+
+- name: Install prerequisites
+  ansible.builtin.apt:
+    name:
+      - curl
+      - gnupg
+      - ca-certificates
+    state: present
+    update_cache: false
+
+- name: Download Epartment apt repo signing key
+  ansible.builtin.get_url:
+    url: https://epartment.github.io/ubuntu-packages/debian/apt-key.asc
+    dest: /tmp/epartment-nginx.asc
+    mode: "0644"
+
+- name: Dearmor and install signing key
+  ansible.builtin.shell:
+    cmd: >
+      gpg --dearmor < /tmp/epartment-nginx.asc
+      > /usr/share/keyrings/epartment-nginx.gpg
+    creates: /usr/share/keyrings/epartment-nginx.gpg
+
+- name: Add Epartment nginx apt repository
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [signed-by=/usr/share/keyrings/epartment-nginx.gpg]
+      https://epartment.github.io/ubuntu-packages
+      {{ ansible_distribution_release }} nginx
+    filename: epartment-nginx
+    state: present
+    update_cache: true
+
+- name: Install libnginx-mod-http-geoip2
+  ansible.builtin.apt:
+    name: libnginx-mod-http-geoip2
+    state: present
+
+- name: Verify module is loaded (nginx -t)
+  ansible.builtin.command: nginx -t
+  changed_when: false
