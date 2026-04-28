@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       nginx_version:
-        description: 'NGINX version (e.g. 1.27.3). Leave blank to auto-detect latest mainline.'
+        description: 'NGINX version (e.g. 1.28.3). Leave blank to build all available stable versions.'
         required: false
       geoip2_version:
         description: 'geoip2 module tag (e.g. 3.4)'
@@ -16,42 +16,73 @@ on:
         type: boolean
         default: true
   schedule:
-    # Weekly check for new nginx mainline releases
+    # Weekly check for new nginx stable releases
     - cron: '0 6 * * 1'
 
 jobs:
-  detect-version:
+  generate-matrix:
     runs-on: ubuntu-24.04
     outputs:
-      nginx_version: ${{ steps.detect.outputs.version }}
-      geoip2_version: ${{ steps.detect.outputs.geoip2 }}
+      matrix: ${{ steps.gen.outputs.matrix }}
+      geoip2_version: ${{ steps.gen.outputs.geoip2_version }}
     steps:
-      - id: detect
+      - id: gen
+        env:
+          NGINX_INPUT: ${{ inputs.nginx_version }}
+          GEOIP2_VERSION: ${{ inputs.geoip2_version || '3.4' }}
         run: |
-          if [ -n "${{ inputs.nginx_version }}" ]; then
-            VERSION="${{ inputs.nginx_version }}"
-          else
-            VERSION=$(curl -fsSL https://nginx.org/en/download.html \
-              | grep -oP 'nginx-\K[0-9]+\.[0-9]+\.[0-9]+(?=\.tar\.gz)' \
-              | head -1)
-          fi
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "geoip2=${{ inputs.geoip2_version || '3.4' }}" >> "$GITHUB_OUTPUT"
-          echo "Building nginx ${VERSION} with geoip2 ${{ inputs.geoip2_version || '3.4' }}"
+          MATRIX=$(python3 - <<'PYEOF'
+          import os, json, urllib.request
+
+          CODENAMES = [
+              ('jammy', 'ubuntu:22.04'),
+              ('noble', 'ubuntu:24.04'),
+              # Ubuntu 26.04 — add once nginx.org publishes packages for it:
+              # ('plucky', 'ubuntu:26.04'),
+          ]
+          ARCHES = ['amd64', 'arm64']
+          nginx_input = os.environ.get('NGINX_INPUT', '').strip()
+
+          includes = []
+          for codename, image in CODENAMES:
+              if nginx_input:
+                  versions = [nginx_input]
+              else:
+                  url = (
+                      'https://nginx.org/packages/ubuntu/dists/'
+                      f'{codename}/nginx/binary-amd64/Packages'
+                  )
+                  with urllib.request.urlopen(url) as r:
+                      content = r.read().decode()
+                  seen = set()
+                  for line in content.splitlines():
+                      if line.startswith('Version:'):
+                          # Version field looks like: 1.28.3-1~jammy
+                          v = line.split()[-1].split('-')[0]
+                          parts = v.split('.')
+                          if len(parts) >= 2 and int(parts[1]) % 2 == 0:
+                              seen.add(v)
+                  versions = sorted(seen, key=lambda v: [int(x) for x in v.split('.')])
+
+              for version in versions:
+                  for arch in ARCHES:
+                      includes.append({
+                          'ubuntu': {'codename': codename, 'image': image},
+                          'nginx_version': version,
+                          'arch': arch,
+                      })
+
+          print(json.dumps({'include': includes}))
+          PYEOF
+          )
+          echo "matrix=${MATRIX}" >> "$GITHUB_OUTPUT"
+          echo "geoip2_version=${GEOIP2_VERSION}" >> "$GITHUB_OUTPUT"
 
   build:
-    needs: detect-version
+    needs: generate-matrix
     strategy:
       fail-fast: false
-      matrix:
-        ubuntu:
-          - { codename: jammy,  image: 'ubuntu:22.04' }
-          - { codename: noble,  image: 'ubuntu:24.04' }
-          # Ubuntu 26.04 LTS — uncomment and set correct codename/tag once released.
-          # - { codename: TBD,    image: 'ubuntu:26.04' }
-        arch:
-          - amd64
-          - arm64
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
 
     runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
 
@@ -64,8 +95,8 @@ jobs:
 
       - name: Build .deb
         env:
-          NGINX_VERSION: ${{ needs.detect-version.outputs.nginx_version }}
-          GEOIP2_VERSION: ${{ needs.detect-version.outputs.geoip2_version }}
+          NGINX_VERSION: ${{ matrix.nginx_version }}
+          GEOIP2_VERSION: ${{ needs.generate-matrix.outputs.geoip2_version }}
           UBUNTU_CODENAME: ${{ matrix.ubuntu.codename }}
           ARCH: ${{ matrix.arch }}
           OUTPUT_DIR: ${{ github.workspace }}/output
@@ -76,7 +107,7 @@ jobs:
 
       - name: Smoke test (install & nginx -t)
         env:
-          NGINX_VERSION: ${{ needs.detect-version.outputs.nginx_version }}
+          NGINX_VERSION: ${{ matrix.nginx_version }}
           UBUNTU_CODENAME: ${{ matrix.ubuntu.codename }}
         run: |
           chmod +x scripts/smoke-test.sh
@@ -90,12 +121,12 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: deb-${{ matrix.ubuntu.codename }}-${{ matrix.arch }}
+          name: deb-${{ matrix.ubuntu.codename }}-nginx${{ matrix.nginx_version }}-${{ matrix.arch }}
           path: ${{ github.workspace }}/output/*.deb
           if-no-files-found: error
 
   release:
-    needs: [detect-version, build]
+    needs: [generate-matrix, build]
     if: ${{ inputs.release != false }}
     runs-on: ubuntu-24.04
     permissions:
@@ -112,13 +143,23 @@ jobs:
       - name: Create or update release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: nginx-${{ needs.detect-version.outputs.nginx_version }}-geoip2-${{ needs.detect-version.outputs.geoip2_version }}
-          name: nginx ${{ needs.detect-version.outputs.nginx_version }} + geoip2 ${{ needs.detect-version.outputs.geoip2_version }}
+          tag_name: geoip2-${{ needs.generate-matrix.outputs.geoip2_version }}
+          name: GeoIP2 module ${{ needs.generate-matrix.outputs.geoip2_version }}
           files: artifacts/*.deb
-          generate_release_notes: true
+          generate_release_notes: false
           body: |
-            Prebuilt `libnginx-mod-http-geoip2` for nginx.org's nginx ${{ needs.detect-version.outputs.nginx_version }}.
+            Prebuilt `libnginx-mod-http-geoip2` (${{ needs.generate-matrix.outputs.geoip2_version }}) for all stable nginx releases from nginx.org.
 
-            **Compatible with:** `nginx=${{ needs.detect-version.outputs.nginx_version }}-1~<codename>` from nginx.org's apt repo.
+            Each `.deb` filename encodes the nginx version and Ubuntu codename — install the one that matches your nginx:
 
-            See the README for installation instructions.
+            ```sh
+            # Check your nginx version
+            nginx -v
+
+            # Install the matching package, e.g. nginx 1.28.3 on Ubuntu 24.04 (noble) amd64:
+            apt install ./libnginx-mod-http-geoip2_1.28.3+${{ needs.generate-matrix.outputs.geoip2_version }}-1~noble_amd64.deb
+            ```
+
+            **Supported:** Ubuntu 22.04 (jammy), 24.04 (noble) · amd64, arm64
+
+            See the README for full installation instructions.
