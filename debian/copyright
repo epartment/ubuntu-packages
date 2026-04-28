@@ -1,0 +1,18 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: ngx_http_geoip2_module
+Upstream-Contact: Lee Valentine <lee@leev.net>
+Source: https://github.com/leev/ngx_http_geoip2_module
+
+Files: *
+Copyright: 2014-present Lee Valentine
+License: BSD-2-Clause
+
+Files: debian/*
+Copyright: epartment
+License: BSD-2-Clause
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the conditions of the
+ BSD 2-Clause License are met. See the upstream LICENSE file for the
+ full text: https://github.com/leev/ngx_http_geoip2_module/blob/master/LICENSE

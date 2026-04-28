@@ -1,0 +1,4 @@
+output/
+*.deb
+*.tar.gz
+.DS_Store
