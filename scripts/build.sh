@@ -20,17 +20,33 @@ echo "==> Building geoip2 module ${GEOIP2_VERSION} for nginx ${NGINX_VERSION} on
 # 1. Build dependencies
 export DEBIAN_FRONTEND=noninteractive
 apt-get -o Acquire::Retries=3 update
+
+# Ubuntu 26.04+ dropped libpcre3-dev in favour of PCRE2; libgeoip-dev is also
+# gone. Detect what's available and adjust accordingly.
+if apt-cache show libpcre3-dev > /dev/null 2>&1; then
+    PCRE_PKG="libpcre3-dev"
+    PCRE_FLAG=""
+else
+    PCRE_PKG="libpcre2-dev"
+    PCRE_FLAG="--with-pcre2"
+fi
+OPTIONAL_PKGS=""
+if apt-cache show libgeoip-dev > /dev/null 2>&1; then
+    OPTIONAL_PKGS="libgeoip-dev"
+fi
+
+# shellcheck disable=SC2086
 apt-get -o Acquire::Retries=3 install -y --no-install-recommends \
     build-essential \
     curl \
     ca-certificates \
-    libpcre3-dev \
+    "${PCRE_PKG}" \
     libssl-dev \
     zlib1g-dev \
     libxml2-dev \
     libxslt1-dev \
     libgd-dev \
-    libgeoip-dev \
+    ${OPTIONAL_PKGS} \
     libmaxminddb-dev \
     dpkg-dev \
     fakeroot \
@@ -69,6 +85,7 @@ cd "nginx-${NGINX_VERSION}"
     --with-compat \
     --with-file-aio \
     --with-threads \
+    ${PCRE_FLAG} \
     --add-dynamic-module="../ngx_http_geoip2_module-${GEOIP2_TAG}"
 
 make modules -j"$(nproc)"
