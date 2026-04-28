@@ -80,7 +80,11 @@ jobs:
           UBUNTU_CODENAME: ${{ matrix.ubuntu.codename }}
         run: |
           chmod +x scripts/smoke-test.sh
-          DEB=$(ls ${{ github.workspace }}/output/*.deb | head -1)
+          DEB=$(find "$GITHUB_WORKSPACE/output" -name "*.deb" | head -1)
+          if [ -z "$DEB" ]; then
+            echo "No .deb found in $GITHUB_WORKSPACE/output/" >&2
+            exit 1
+          fi
           scripts/smoke-test.sh "$DEB"
 
       - name: Upload artifact
