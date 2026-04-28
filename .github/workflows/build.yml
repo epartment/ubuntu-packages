@@ -37,8 +37,7 @@ jobs:
           CODENAMES = [
               ('jammy', 'ubuntu:22.04'),
               ('noble', 'ubuntu:24.04'),
-              # Ubuntu 26.04 — add once nginx.org publishes packages for it:
-              # ('plucky', 'ubuntu:26.04'),
+              ('resolute', 'ubuntu:26.04'),
           ]
           ARCHES = ['amd64', 'arm64']
           nginx_input = os.environ.get('NGINX_INPUT', '').strip()
@@ -176,7 +175,7 @@ jobs:
             apt install ./libnginx-mod-http-geoip2_1.28.3+${{ needs.generate-matrix.outputs.geoip2_version }}-1~noble_amd64.deb
             ```
 
-            **Supported:** Ubuntu 22.04 (jammy), 24.04 (noble) · amd64, arm64
+            **Supported:** Ubuntu 22.04 (jammy), 24.04 (noble), 26.04 (resolute) · amd64, arm64
 
             See the README for full installation instructions.
 

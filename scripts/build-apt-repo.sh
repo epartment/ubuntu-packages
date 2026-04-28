@@ -30,7 +30,7 @@ DEBS_DIR="${1:?usage: build-apt-repo.sh <debs-dir> <repo-dir>}"
 REPO_DIR="${2:?usage: build-apt-repo.sh <debs-dir> <repo-dir>}"
 GPG_KEY_ID="${GPG_KEY_ID:?GPG_KEY_ID env var must be set}"
 COMPONENT="${COMPONENT:-nginx}"
-SUPPORTED_CODENAMES="${SUPPORTED_CODENAMES:-jammy noble}"
+SUPPORTED_CODENAMES="${SUPPORTED_CODENAMES:-jammy noble resolute}"
 
 DEBS_DIR="$(realpath "${DEBS_DIR}")"
 REPO_DIR="$(realpath "${REPO_DIR}")"
