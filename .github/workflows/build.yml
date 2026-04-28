@@ -54,16 +54,30 @@ jobs:
                   )
                   with urllib.request.urlopen(url) as r:
                       content = r.read().decode()
+                  # Parse the Packages file as RFC 2822-style stanzas so we
+                  # only collect versions from the 'nginx' package itself
+                  # (other entries like nginx-module-njs have different schemes).
                   seen = set()
+                  stanza: dict = {}
                   for line in content.splitlines():
-                      if line.startswith('Version:'):
-                          # Version field looks like: 1.28.3-1~jammy or 1.28.2+0~...
-                          raw = line.split()[-1]
-                          raw = raw.split(':')[-1]   # strip epoch if present
-                          v = re.split(r'[-+]', raw)[0]  # keep only upstream version
-                          parts = v.split('.')
-                          if len(parts) >= 2 and int(parts[1]) % 2 == 0:
-                              seen.add(v)
+                      if line == '':
+                          if stanza.get('Package') == 'nginx' and 'Version' in stanza:
+                              raw = stanza['Version'].split(':')[-1]
+                              v = re.split(r'[-+]', raw)[0]
+                              parts = v.split('.')
+                              if len(parts) >= 2 and int(parts[1]) % 2 == 0:
+                                  seen.add(v)
+                          stanza = {}
+                      elif ': ' in line:
+                          key, _, val = line.partition(': ')
+                          stanza[key] = val
+                  # Handle file that doesn't end with a blank line
+                  if stanza.get('Package') == 'nginx' and 'Version' in stanza:
+                      raw = stanza['Version'].split(':')[-1]
+                      v = re.split(r'[-+]', raw)[0]
+                      parts = v.split('.')
+                      if len(parts) >= 2 and int(parts[1]) % 2 == 0:
+                          seen.add(v)
                   versions = sorted(seen, key=lambda v: [int(x) for x in v.split('.')])
 
               for version in versions:

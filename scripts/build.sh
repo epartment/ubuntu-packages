@@ -19,8 +19,8 @@ echo "==> Building geoip2 module ${GEOIP2_VERSION} for nginx ${NGINX_VERSION} on
 
 # 1. Build dependencies
 export DEBIAN_FRONTEND=noninteractive
-apt-get update
-apt-get install -y --no-install-recommends \
+apt-get -o Acquire::Retries=3 update
+apt-get -o Acquire::Retries=3 install -y --no-install-recommends \
     build-essential \
     curl \
     ca-certificates \
