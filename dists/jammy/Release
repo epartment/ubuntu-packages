@@ -1,32 +1,32 @@
 Architectures: amd64 arm64
 Codename: jammy
 Components: nginx
-Date: Tue, 19 May 2026 12:31:14 +0000
+Date: Tue, 19 May 2026 13:15:05 +0000
 Description: Prebuilt ngx_http_geoip2_module for nginx.org's nginx
 Label: Epartment nginx geoip2
 Origin: Epartment
 Suite: jammy
 MD5Sum:
- 6f50d08dc03b92d4227a50fcede84d5c              227 Release
- b266e7aea3f3ecf571c092232942ce03              741 nginx/binary-amd64/Packages
- 116164b500238e49b934964d84b3b4ba              506 nginx/binary-amd64/Packages.gz
- f7bad11029507afe57124cb6bb78e2d3              741 nginx/binary-arm64/Packages
- 6186aeee0eae1824940cccf07a494732              505 nginx/binary-arm64/Packages.gz
+ 5a1e0a530f89bf308ae782fb45299a86              227 Release
+ a49ee8cfcbad420cd2def1a9e6f22ca8              743 nginx/binary-amd64/Packages
+ d732d70446015a1ffdae24aa2a66947b              511 nginx/binary-amd64/Packages.gz
+ 4280296f332a60dec86713cd5a7283c2              743 nginx/binary-arm64/Packages
+ 0c5ca4d0bd095ddfe61fa2b281a56990              509 nginx/binary-arm64/Packages.gz
 SHA1:
- 108a77dcdd6362f833473620ceaee2d9bd880ed6              227 Release
- eb14fea60e6fc5b57a4bfa404c590e2ebf330b3e              741 nginx/binary-amd64/Packages
- fdb25794c2e731854e054ac9867b53dfab152899              506 nginx/binary-amd64/Packages.gz
- 0d17f787b15098af3a7a155939ddcd88ab1ca383              741 nginx/binary-arm64/Packages
- e9d8e9c2cde4bb02cc0c92d695637b2bdfba98bb              505 nginx/binary-arm64/Packages.gz
+ 969c4ed639a31dcb1faba1fff8a7474209e3a8c5              227 Release
+ 072fb3955fe0da00eec3c5c98bdef6bbf453ee2c              743 nginx/binary-amd64/Packages
+ 6a50c0fa3e86250759de4ff10962deef362b0cb2              511 nginx/binary-amd64/Packages.gz
+ 5c2d0c0cb65c9980506f31e1b07d2bac986ddae6              743 nginx/binary-arm64/Packages
+ 5d2c8a4698ae5b7c5579c98e004f5e7692975aa2              509 nginx/binary-arm64/Packages.gz
 SHA256:
- 956f79960e9acac265bb490978ad22282c806ea71eb48d869cc3f7b3678bb2db              227 Release
- 6d0661dd9f4d4bfddf9729110738fdab0ca34b32210b1ea1050af2bee604b7cc              741 nginx/binary-amd64/Packages
- b85891e7b7707f8ba51279f64f5342d1043e4b9ac0630bdf2e19ff766b8c0b52              506 nginx/binary-amd64/Packages.gz
- 2700ffbfd52a4991639f6badc4eaf7ead17227ba36485a3eddaef3824682359c              741 nginx/binary-arm64/Packages
- 1f87e9350a7bcec2caec2c4b70bb4b9de56cae9aa2f730d91fa43717df970f03              505 nginx/binary-arm64/Packages.gz
+ 9538d9ed5f8c0a87c6eef43837edfe8e9bd155e46d6ff95ffdfc8c6a5de225da              227 Release
+ 112c344e5fea8c905224ef3965d217f15fd19f26985dd12babdfe0052c046458              743 nginx/binary-amd64/Packages
+ d460a43ebff777c71341820fcb1e8e18f8649bf1e08cc468c5269dce0a80d01e              511 nginx/binary-amd64/Packages.gz
+ cdafcffc279d1b8ed6639066d89966f1877fdcabb4cd46d2130eca98733cc30d              743 nginx/binary-arm64/Packages
+ 34d84071ffc0817ff36a43357ced2e80cebfcf5d50695993dbfc29df85571135              509 nginx/binary-arm64/Packages.gz
 SHA512:
- 94fc3d74b848ef96ada30653bd9ae40d57d24f35784b0e66ff6b11f0c56d1e1fdc7756f18a498f52932d5b6b9613727eed625f44a834145f51792d747ea0b6ea              227 Release
- 08ea705f7643b0937c967a23e0059da2b7f6e31ba6441e6048d98c06d58ff75b32e1c09b958a2d3291980564460d61e52149c6e114b753068605d6bb2f6e4a7a              741 nginx/binary-amd64/Packages
- ee4cd2646a691eb466623347be024767bf475cbd2b0c364c5b17f2889332be7d7d42fd5e56c06fcd5bdbbe8391f6a2945b76972d56a54363abfd5a94df9d1ab0              506 nginx/binary-amd64/Packages.gz
- bb17d6f89e5b543a8bed661b776567e65e8657dfc0519d566aa2e292b412e0931fa270087d6c433754f1203ce46ab98c21161072525b21405e74ad10515c8ebd              741 nginx/binary-arm64/Packages
- e819e6381718317c077d934fdfa6a84e1200978b9df170529ffcf3cd9cd986e5f9bee96c195a7c6a7615e2754c1b5a37bae60e7ae57d7157b1df4fe2e9e56345              505 nginx/binary-arm64/Packages.gz
+ 8f0964afd7788832d6e6f0d66bbdf5325daf70d72bba3d566eaa2d967cf55cfaf600a3c7d4daba5b8919f8e526439aeda7330fe2b35ab9482fc181a1db9f8f21              227 Release
+ e9f9f313eb91a9706ac04f5ad9393b5588b286f9f443fd9cf5776817bbaf95ed9ca033ff91cffcb0654b137efefaaff9cd9752b4677f93342a7c45015d863661              743 nginx/binary-amd64/Packages
+ 77bcca12df7be082c559e7ba71ded5e1963793648a32d2cc67a4e1a4853335258dda3a37738aa04262a89d06e07422a1d9f8513ededd4c788f0d4a818e305251              511 nginx/binary-amd64/Packages.gz
+ bd627ac67c79c963e3cdcad3aba5c9f213cfe158bacd256337b0b448ff62d3d36f8790f9cb12ac7b85f6e8e34b37ee83b6d5aa50bf3c6ac841f5ffd1e3a1041e              743 nginx/binary-arm64/Packages
+ 770858b1be3d304d41ec85a0492481d1f079e8fbaf286c4db8e8cf228a48420abd5f3e6441dc988c0aa6a2fe86b80b33b1e385134cce2661bf4eafb16adef620              509 nginx/binary-arm64/Packages.gz
