@@ -55,14 +55,31 @@ for deb in "${DEBS_DIR}"/*.deb; do
     [ -f "${deb}" ] || { echo "WARNING: no .deb files found in ${DEBS_DIR}"; break; }
     filename="$(basename "${deb}")"
 
-    # Detect codename from the version string (e.g. 1.28.3+3.4-1~noble_amd64.deb → noble)
+    # Detect codename from the filename. Current builds use ".<codename>_"
+    # (because ':' and '~' are awkward in artifact filenames), while some
+    # historical files used "~<codename>_".
     codename=""
     for cn in ${SUPPORTED_CODENAMES}; do
-        if [[ "${filename}" == *"~${cn}_"* ]]; then
+        if [[ "${filename}" == *".${cn}_"* ]] || [[ "${filename}" == *"~${cn}_"* ]]; then
             codename="${cn}"
             break
         fi
     done
+
+    # Fallback: read the package Version field and parse the distro suffix
+    # (e.g. 2:1.30.1+3.4-1~jammy) in case the filename format changes again.
+    if [ -z "${codename}" ]; then
+        version_field="$(dpkg-deb -f "${deb}" Version 2>/dev/null || true)"
+        if [[ "${version_field}" =~ ~([a-z0-9]+)$ ]]; then
+            codename_from_version="${BASH_REMATCH[1]}"
+            for cn in ${SUPPORTED_CODENAMES}; do
+                if [ "${codename_from_version}" = "${cn}" ]; then
+                    codename="${cn}"
+                    break
+                fi
+            done
+        fi
+    fi
 
     if [ -z "${codename}" ]; then
         echo "WARNING: cannot detect codename from '${filename}', skipping" >&2
