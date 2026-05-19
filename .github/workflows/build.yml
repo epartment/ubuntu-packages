@@ -142,7 +142,7 @@ jobs:
 
   release:
     needs: [generate-matrix, build]
-    if: ${{ inputs.release != false }}
+    if: ${{ github.event_name == 'schedule' || inputs.release != false }}
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -181,7 +181,7 @@ jobs:
 
   publish-apt-repo:
     needs: [generate-matrix, build]
-    if: ${{ inputs.release != false }}
+    if: ${{ github.event_name == 'schedule' || inputs.release != false }}
     runs-on: ubuntu-24.04
     permissions:
       contents: write
