@@ -1,18 +1,18 @@
 Package: libnginx-mod-http-geoip2
-Version: 2:1.30.1+3.4-1~resolute
+Version: 2:1.30.2+3.4-1~resolute
 Architecture: amd64
 Maintainer: epartment Ops <ops@epartment.example>
-Depends: nginx (= 1.30.1-1~resolute), libmaxminddb0
-Filename: pool/resolute/libnginx-mod-http-geoip2_1.30.1+3.4-1.resolute_amd64.deb
-Size: 39008
-MD5sum: 921f40f001b2d66681ec74f28278106b
-SHA1: 6e8d59b6300fa4c95c6b739fc6eaefced5c3d392
-SHA256: 1c202cf6d0db0e3b97b99c2402dcb423b714184bebb716bd102f779a2a10b628
+Depends: nginx (= 1.30.2-1~resolute), libmaxminddb0
+Filename: pool/resolute/libnginx-mod-http-geoip2_1.30.2+3.4-1.resolute_amd64.deb
+Size: 38990
+MD5sum: cbbda526e529692ac971278588fd0402
+SHA1: 1cb010b186dd6d98ac832b97b968f0872c88633d
+SHA256: 9c77141ad6affe878bc2ae459b8d881334708b75e582618c13a89935d933dab3
 Section: httpd
 Priority: optional
 Homepage: https://github.com/leev/ngx_http_geoip2_module
 Description: GeoIP2 dynamic module for nginx
  Dynamic module that uses the MaxMind GeoIP2 databases to set
  variables in nginx based on the client IP address. Built against
- nginx 1.30.1 from nginx.org for Ubuntu resolute.
+ nginx 1.30.2 from nginx.org for Ubuntu resolute.
 
