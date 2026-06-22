@@ -1,18 +1,18 @@
 Package: libnginx-mod-http-geoip2
-Version: 2:1.30.2+3.4-1~noble
+Version: 2:1.30.3+3.4-1~noble
 Architecture: amd64
 Maintainer: epartment Ops <ops@epartment.example>
-Depends: nginx (= 1.30.2-1~noble), libmaxminddb0
-Filename: pool/noble/libnginx-mod-http-geoip2_1.30.2+3.4-1.noble_amd64.deb
-Size: 39310
-MD5sum: 7c9f625ea63f440b4f72c55da71fd7a2
-SHA1: 76c81cb3819843a0db5042b0d3ea218a864a95e5
-SHA256: 24da6b90d30e239dfe56fa5cb4add131414e3ea609e274d272bcc3a4ce801794
+Depends: nginx (= 1.30.3-1~noble), libmaxminddb0
+Filename: pool/noble/libnginx-mod-http-geoip2_1.30.3+3.4-1.noble_amd64.deb
+Size: 39312
+MD5sum: e89da1948bb6941dc249298b752791ca
+SHA1: ba8bb4043895f2188be31590f5de485b84b3421b
+SHA256: 5503a930daaa040eb392838bae42c90f305e2a849ae853b2bf93ab3846207e7c
 Section: httpd
 Priority: optional
 Homepage: https://github.com/leev/ngx_http_geoip2_module
 Description: GeoIP2 dynamic module for nginx
  Dynamic module that uses the MaxMind GeoIP2 databases to set
  variables in nginx based on the client IP address. Built against
- nginx 1.30.2 from nginx.org for Ubuntu noble.
+ nginx 1.30.3 from nginx.org for Ubuntu noble.
 
