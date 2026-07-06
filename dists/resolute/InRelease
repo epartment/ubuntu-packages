@@ -4,39 +4,39 @@ Hash: SHA512
 Architectures: amd64 arm64
 Codename: resolute
 Components: nginx
-Date: Mon, 29 Jun 2026 07:48:10 +0000
+Date: Mon, 06 Jul 2026 07:41:14 +0000
 Description: Prebuilt ngx_http_geoip2_module for nginx.org's nginx
 Label: Epartment nginx geoip2
 Origin: Epartment
 Suite: resolute
 MD5Sum:
- 843e5d4d4e0d05ce995ca9a604745bc1              233 Release
+ cd72297737b074b2307db3353a55f20c              233 Release
  c0c903aa32beb11ba31bfaed561f5cb4              758 nginx/binary-amd64/Packages
- c0ccc7bb4010c60504239e4b8817564e              512 nginx/binary-amd64/Packages.gz
+ 2593b89964889df953f0b5149e858802              512 nginx/binary-amd64/Packages.gz
  0d905d168b2a907fa453d145e6132ba2              758 nginx/binary-arm64/Packages
- 26ac3dfac409f323f118b3380c6fdbbb              511 nginx/binary-arm64/Packages.gz
+ 928e9468206d50d6819348536567ffc5              511 nginx/binary-arm64/Packages.gz
 SHA1:
- 4f7560e83916bbcf5bf877899da43289dee8a672              233 Release
+ 699bd7bfd72e396383c5a6eed43375279208ba04              233 Release
  0e7df71de2192a772826c4891f54e2311e89e2f3              758 nginx/binary-amd64/Packages
- 00ba705e3d1962d6eaaf16b0c1738a8598af0305              512 nginx/binary-amd64/Packages.gz
+ 39e0a27bdd89c693fdf4dfea5f56dd9b54779399              512 nginx/binary-amd64/Packages.gz
  b08b6d6c8b6dfdd6fc0248da15b03e1f7e3e7a7e              758 nginx/binary-arm64/Packages
- 613eb57ad71ab64c671d14f6fe6726981a318b56              511 nginx/binary-arm64/Packages.gz
+ bc95572847d736a3c2ddaaab5413421435944774              511 nginx/binary-arm64/Packages.gz
 SHA256:
- 99206c2760c7fc47ff2bb387e2d2c75da4e1dad815b063a5a677cfd1317ec1f1              233 Release
+ c9cfe52cc6594cb5a53251f14c5dcea767000a04ad6a22ed1523fdad5a2cf3ba              233 Release
  1a39960073448eacadabdac8b83ce25e29c6bd3e56b14655ee6fefbba5009705              758 nginx/binary-amd64/Packages
- 4dbda66e825b6654dab608de56b4f70ae80787278b8d60c266242710d638fa33              512 nginx/binary-amd64/Packages.gz
+ 905b022d89c9b06913cf378975f1def5ac0d34db1e933eb5161783940463efd3              512 nginx/binary-amd64/Packages.gz
  ea6e92b611a0837daadea5696edefdfc517fb47abebe3a7138805072c9a73cd7              758 nginx/binary-arm64/Packages
- b775338e124c83bd8f173e5634348ab6547a136e249463abc5d5f4d23d9ceb27              511 nginx/binary-arm64/Packages.gz
+ 789813e98cce3fc80bb794435fd9d30d98660b41692af232074b6057e7088ac9              511 nginx/binary-arm64/Packages.gz
 SHA512:
- 4542bf3c9c4374248fac0880d3a2a61bbae23c71eac4ae1473e5dc4579a33b23d328075c1e89d2ef714c25ad2d685f22cd5901cf6167f44b2f39a1a0394234f3              233 Release
+ 633b7c99c3c23c1a441f24b5d3f6e5383b453832c58353e4870afa4dc57cfa01ed170d9764207458197df4f245e2105e564f56930278c7dfc022942b65c291d4              233 Release
  70a5c149254e0c789f6ca26c48358c9085b397171d901fcb93bdb944975fcfc38796b8f94a66eb4e1053150f438d8150d0ae5b9509aa85529f41f57c6c60c442              758 nginx/binary-amd64/Packages
- cd7e495bc42fefda2bb4648cd7a99de83b6824efc79b6e41bf6c3b1aea97a65ffa237eaabf9201bee29659159c9196619e73f2f4ee50321e9c69e9165b9029ec              512 nginx/binary-amd64/Packages.gz
+ e5282590c636afa701440b9fead02eb4db7a3f9c3fa3d155657c79fee65bf9388064c23e93a59c8b2b2e5fa7fa911ddc2582864da5a745816564b720a811b327              512 nginx/binary-amd64/Packages.gz
  1d77e57abd107fe230a5a2c904a2fc6e39d23b99c7e5da7f131c92a0940f55be65fae46fb68ec4585e2492d8f2b1d315507f1946ba07e5d072d0aaf0e42eb852              758 nginx/binary-arm64/Packages
- b5391346513c4bb6bebb3a4a6e5931935a50df03a893a83d65115a01971e2bded871bdb3974e8c8284701da08a3ae8231a3b12525a9b3119ed8a37cde5b3ad1a              511 nginx/binary-arm64/Packages.gz
+ 45b527bf8d74ac45af6ba7169e94be4e64307dd6d1a51442d30f4ed31058003451ba4ad9b575fcf9001fe57d90de8ea3a5fa8815fcf31329c451aa1405f29cd6              511 nginx/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQQHpqMlX2EIPm6tZPXSpM9OKGJuHQUCakIjOgAKCRDSpM9OKGJu
-HecIAQCgf81bz+Oa/eFm9/Thj7I2h8vMYLmmudU4GA8nxrqkPQEAxrHvU7Dc1ns0
-kKE4E/EnneXnBJoepXSrNq2K6YvgOwA=
-=gwE6
+iHUEARYKAB0WIQQHpqMlX2EIPm6tZPXSpM9OKGJuHQUCaktcGgAKCRDSpM9OKGJu
+HWHeAQCzuXJkova+FawHD+efez7NF6bpABnturT8+y1mcnldvAEAp3it3CztgIP1
+hhjCeBgS0zqZsTiRmT7mlHXR0YD39gs=
+=aWBP
 -----END PGP SIGNATURE-----
