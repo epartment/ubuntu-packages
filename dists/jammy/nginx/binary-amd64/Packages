@@ -1,18 +1,18 @@
 Package: libnginx-mod-http-geoip2
-Version: 2:1.30.3+3.4-1~jammy
+Version: 2:1.30.4+3.4-1~jammy
 Architecture: amd64
 Maintainer: epartment Ops <ops@epartment.example>
-Depends: nginx (= 1.30.3-1~jammy), libmaxminddb0
-Filename: pool/jammy/libnginx-mod-http-geoip2_1.30.3+3.4-1.jammy_amd64.deb
-Size: 40804
-MD5sum: 60501e8b107407fe0962ecf4a00fbb74
-SHA1: 5845e59b693fe3e483133705a33fb27db70cf51a
-SHA256: 4fe163f81221625038c58a3c4c64b18bf02a52d5f5ed892dcc98a917022814b7
+Depends: nginx (= 1.30.4-1~jammy), libmaxminddb0
+Filename: pool/jammy/libnginx-mod-http-geoip2_1.30.4+3.4-1.jammy_amd64.deb
+Size: 40784
+MD5sum: 6ca79280a3ae315df104dc6b8ea362c0
+SHA1: 33fcf474024f5d1aaaf72caaff8960d7a35cd00a
+SHA256: 23398d8b49a62aafb3f6c36fa70c0184ea46aae6374005a38798c57f08b19f1e
 Section: httpd
 Priority: optional
 Homepage: https://github.com/leev/ngx_http_geoip2_module
 Description: GeoIP2 dynamic module for nginx
  Dynamic module that uses the MaxMind GeoIP2 databases to set
  variables in nginx based on the client IP address. Built against
- nginx 1.30.3 from nginx.org for Ubuntu jammy.
+ nginx 1.30.4 from nginx.org for Ubuntu jammy.
 
