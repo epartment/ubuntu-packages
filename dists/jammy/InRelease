@@ -4,39 +4,39 @@ Hash: SHA512
 Architectures: amd64 arm64
 Codename: jammy
 Components: nginx
-Date: Mon, 09 Nov 2026 06:16:12 +0000
+Date: Mon, 16 Nov 2026 06:22:55 +0000
 Description: Prebuilt ngx_http_geoip2_module for nginx.org's nginx
 Label: Epartment nginx geoip2
 Origin: Epartment
 Suite: jammy
 MD5Sum:
- c43d4a9eb38fb9917150188c7ad8f6c8              227 Release
+ e11ce2af370ed3159f99a03468a97b2b              227 Release
  a54153445bc9a023b60227ce55cec996              743 nginx/binary-amd64/Packages
- 8f90158c525c357a835f98541f1e612c              509 nginx/binary-amd64/Packages.gz
+ 7123e54cedf4bc95f94257a5eea98b78              509 nginx/binary-amd64/Packages.gz
  8e658b53bb3f686be16f2c460ea9ba10              743 nginx/binary-arm64/Packages
- cb038cc3431c3587f45f8d9d6ba575e5              509 nginx/binary-arm64/Packages.gz
+ 45431a3abe9f18d81b71a7a1e372bd61              509 nginx/binary-arm64/Packages.gz
 SHA1:
- 2d07ac789ae23ee5e4e91ad9af80df12897cff3e              227 Release
+ 3932658fe53620f92a552280907a830948487f3b              227 Release
  4abbb01086a74d086a339cdef4bf7aa70dac775f              743 nginx/binary-amd64/Packages
- b9cbad6301c002b6cac7d3ca097f1af9f3597036              509 nginx/binary-amd64/Packages.gz
+ 4617ca322544a37c62e2f4a82a34bcf7ea6e2b3d              509 nginx/binary-amd64/Packages.gz
  ec2166b46c73fcebd7c7a7e23a78c7f40ed05c5c              743 nginx/binary-arm64/Packages
- 7080fd2c4c517764c4be2aaa476c940ab26575bb              509 nginx/binary-arm64/Packages.gz
+ 8c931360385205ff13e0ae2314702eeeaa3c68da              509 nginx/binary-arm64/Packages.gz
 SHA256:
- 5efa54a90a7c9387853a0170374e656c7b3e2c747b00f29344c59757e4cf61da              227 Release
+ c8216ff78c958906d487191cd959eeaa6cb8bdb1b159dac188a85cafe21b049b              227 Release
  35a5099eea2fb4e0d5f37e5e953dbaa28d8cba0985c9887a12dfef02420632db              743 nginx/binary-amd64/Packages
- 1096505d22b228cebd25895ec589e96eb8371647cc899352982f77098ce041cf              509 nginx/binary-amd64/Packages.gz
+ f4744e44d38a6756dd8760c2ab0a55961a5544136868ef44fb7b3ed6e9a32f15              509 nginx/binary-amd64/Packages.gz
  58eeb18db74d81442d4255380e1ddef2c29e642ebd86b98026dadae784b250d8              743 nginx/binary-arm64/Packages
- 7a8dc9297201dd48715b0f1d5da92a652e67a23f91f8416d2afbfe5635ec939c              509 nginx/binary-arm64/Packages.gz
+ b8a59d94d2d934ca0d322e1f4759888daacffc32c8d99aeaa58ff3cf91f27b01              509 nginx/binary-arm64/Packages.gz
 SHA512:
- a090357487310e98af2c35888503f14f540ad5590ddb2309b54db749137a270995ca06e37e78c1671861c98848f07770bee5de02a854335c65f55c28450a888e              227 Release
+ 9491cfc5aca3d2882403e3435aa786d0470d14978c68183b898d3e2b4a5d1012847ff2ba209790a2035bb7f01a3ce70d01e874a645bbb64aed341f393afebe11              227 Release
  c70c41db868d7e296bd24f375981311a81778fdc88ef4b10728b4beb8e3f5b27a69e2f9fdc0500eb4ae193a669889c31bba6da331dddb4731d056f8b701edbce              743 nginx/binary-amd64/Packages
- b0e88eea114b9b6e4a9a8b3316de4ccf089b21387a1b51ae17667439f5b68123e183be855a0116e829d9b2fd11968e5ebcf93884982ff9fd54ab1c46dcc2a3e6              509 nginx/binary-amd64/Packages.gz
+ 8a60afb0686674c438de870913d350197db53700c5d6302ebda51d73fc26a98f1799ea3520871e889a49d7a34a6b62aa79728bf99accd2decd1d01624762c0f6              509 nginx/binary-amd64/Packages.gz
  bf3b845a6297b0ac032b122b8d79fbf3afe9eb3b599a4e202d1ec7ba09bdcafb1e19d666f7abb6028e1ee00f85a3e3fb9199a3f11ebc054e51bd2867f43c2feb              743 nginx/binary-arm64/Packages
- 6ef0cc5473e9159aa139d534f870068e7f509ddb155ea3495c144176413807c507829f0e878ba1f76713a60317d00af604143d3e03c52ed960422fa746358e6f              509 nginx/binary-arm64/Packages.gz
+ 40f7ebec0d4a246bc98ee63e3444e46fc94961f967830bab296e71b090815f5f1be85d88924174787bf8bc1f2ead914fb5c37faa091272a3e897ca3dced279c0              509 nginx/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQQHpqMlX2EIPm6tZPXSpM9OKGJuHQUCavFlLAAKCRDSpM9OKGJu
-Hdo7AQChkFqyqR70Is01hxKdA+sQLKDojAosjsUYixBhYR04fgD/dMH9IeBgUMM1
-+8d99xq0zDyTJGVRc49jS6ncEFUyog4=
-=QDwW
+iHUEARYKAB0WIQQHpqMlX2EIPm6tZPXSpM9OKGJuHQUCavqhPwAKCRDSpM9OKGJu
+HXcMAP9ZBc5cm2eVJaGSZUVqr2UKw6ZLP5zMcy0t6/8NTPvfowEA93AOIENXTrDl
+I037v0Vc2/9Xhwv8Y4WOJnNiSkT8oAA=
+=j5wn
 -----END PGP SIGNATURE-----
